@@ -17,14 +17,31 @@ object Main {
       if (c == 0 || c == r) {
         1
       } else {
-        return pascal(c-1, r-1) + pascal(c, r-1)
+        pascal(c-1, r-1) + pascal(c, r-1)
       }
     }
   
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+    def balance(chars: List[Char], count: Int = 0): Boolean = {
+      if (count == 0 && chars.isEmpty) {
+        true
+      } else if (chars.isEmpty) {
+        false
+      } else {
+        val head = chars.head
+        if (head == '(') {
+          balance(chars.tail, count + 1)
+        } else if (head == ')' && count > 0) {
+          balance(chars.tail, count - 1)
+        } else if (head == ')') {
+          false
+        } else {
+          balance(chars.tail, count)
+        }
+      }
+    }
   
   /**
    * Exercise 3
